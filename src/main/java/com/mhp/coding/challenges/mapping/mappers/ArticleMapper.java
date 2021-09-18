@@ -10,11 +10,11 @@ import java.util.stream.Collectors;
 @Component
 public class ArticleMapper {
 
-    private ArticleBlockMapper articleBlockMapper;
+    private ArticleBlockListMapper articleBlockListMapperMapper;
 
     @Autowired
-    public void setArticleBlockMapper(ArticleBlockMapper articleBlockMapper) {
-        this.articleBlockMapper = articleBlockMapper;
+    public void setArticleBlockListMapper(ArticleBlockListMapper articleBlockMapper) {
+        this.articleBlockListMapperMapper = articleBlockMapper;
     }
 
     public ArticleDto map(Article article) {
@@ -24,7 +24,7 @@ public class ArticleMapper {
         articleDto.setTitle(article.getTitle());
         articleDto.setAuthor(article.getAuthor());
         articleDto.setDescription(article.getDescription());
-        articleDto.setBlocks(articleBlockMapper.mapBlocks(article.getBlocks()));
+        articleDto.setBlocks(articleBlockListMapperMapper.mapBlocks(article.getBlocks()));
         return articleDto;
     }
 
