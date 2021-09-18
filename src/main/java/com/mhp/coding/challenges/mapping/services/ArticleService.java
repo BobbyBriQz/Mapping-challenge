@@ -1,5 +1,6 @@
 package com.mhp.coding.challenges.mapping.services;
 
+import com.mhp.coding.challenges.mapping.exceptions.ResourceNotFoundException;
 import com.mhp.coding.challenges.mapping.mappers.ArticleMapper;
 import com.mhp.coding.challenges.mapping.models.db.Article;
 import com.mhp.coding.challenges.mapping.models.dto.ArticleDto;
@@ -33,9 +34,7 @@ public class ArticleService {
 
     public ArticleDto articleForId(Long id) {
         final Article article = repository.findBy(id);
-        if(article == null){
-            //todo: throw ResourceNotFoundException
-        }
+        if(article == null) throw new ResourceNotFoundException(String.format("Article With ID %d Not Found", id));
         return mapper.map(article);
     }
 

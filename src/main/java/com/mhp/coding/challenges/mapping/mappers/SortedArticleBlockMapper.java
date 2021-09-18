@@ -1,8 +1,11 @@
 package com.mhp.coding.challenges.mapping.mappers;
 
 
+import com.mhp.coding.challenges.mapping.exceptions.ArticleServiceException;
 import com.mhp.coding.challenges.mapping.models.db.blocks.*;
 import com.mhp.coding.challenges.mapping.models.dto.blocks.ArticleBlockDto;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -13,6 +16,8 @@ import java.util.stream.Collectors;
 
 @Component
 public class SortedArticleBlockMapper implements ArticleBlockMapper{
+
+    private Logger logger = LoggerFactory.getLogger(SortedArticleBlockMapper.class);
 
     private ImageMapper imageMapper;
 
@@ -43,8 +48,7 @@ public class SortedArticleBlockMapper implements ArticleBlockMapper{
             return videoBlockMapper.map(articleBlock);
         }
 
-        //todo: throw exception info to user
-        return null;
+        throw new ArticleServiceException("Strategy Not Implemented.");
     }
 
     @Override
