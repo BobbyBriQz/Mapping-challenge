@@ -15,4 +15,9 @@ public class ArticleServiceException extends RuntimeException {
         this.message = message;
         this.status = false;
     }
+
+    public boolean isStatus() {
+        return status;
+    }
+
 }

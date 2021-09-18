@@ -15,4 +15,10 @@ public class ResourceNotFoundException extends ArticleServiceException {
         this.message = message;
         this.status = false;
     }
+
+    public boolean isStatus() {
+        return status;
+    }
+
+
 }
