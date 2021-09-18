@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class ArticleService {
@@ -25,14 +26,17 @@ public class ArticleService {
 
     public List<ArticleDto> list() {
         final List<Article> articles = repository.all();
-        //TODO
-        return new ArrayList<>();
+        return articles.stream()
+                .map(mapper::map)
+                .collect(Collectors.toList());
     }
 
     public ArticleDto articleForId(Long id) {
         final Article article = repository.findBy(id);
-        //TODO
-        return new ArticleDto();
+        if(article == null){
+            //todo: throw ResourceNotFoundException
+        }
+        return mapper.map(article);
     }
 
     public ArticleDto create(ArticleDto articleDto) {

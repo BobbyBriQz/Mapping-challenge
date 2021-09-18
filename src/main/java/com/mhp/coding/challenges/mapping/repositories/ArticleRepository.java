@@ -22,7 +22,11 @@ public class ArticleRepository {
     }
 
     public Article findBy(Long id){
-        return createDummyArticle(id);
+        return all()
+                .stream()
+                .filter(i -> i.getId().equals(id))
+                .findFirst()
+                .orElse(null);
     }
 
     public void create(Article article){
@@ -91,6 +95,6 @@ public class ArticleRepository {
         result.setLastModifiedBy("Max Mustermann");
         result.setImageSize(ImageSize.LARGE);
         result.setUrl("https://someurl.com/image/" + imageId);
-        return null;
+        return result;
     }
 }
